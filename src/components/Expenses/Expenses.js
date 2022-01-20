@@ -1,26 +1,23 @@
-import ExpenseItem from "./ExpenseItem";
+import React, { useState } from "react";
 import "./Expenses.css";
 import ExpensesFilter from "../ExpensesFilter/ExpensesFilter";
 import ExpenseDate from "./ExpenseDate";
+import ExpensesList from "./ExpensesList";
 
 const Expenses = (Props) => {
   // adding a filter here
+  const [filteredYear, setFilteredYear] = useState("2022");
   const saveFilterExpenses = (event) => {
-    const expenses = { event, id: Math.random().toString() };
-    console.log(expenses);
+    setFilteredYear(event);
   };
+  const filteredExpenses = Props.expenses.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
 
   return (
     <div className="expenses">
       <ExpensesFilter onFilterExpenses={saveFilterExpenses} />
-      {Props.expenses.map((expense) => (
-        <ExpenseItem
-          key={expense.id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-        />
-      ))}
+      <ExpensesList Items={filteredExpenses} />
     </div>
   );
 };
