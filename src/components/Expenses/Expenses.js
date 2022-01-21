@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Expenses.css";
 import ExpensesFilter from "../ExpensesFilter/ExpensesFilter";
-import ExpenseDate from "./ExpenseDate";
 import ExpensesList from "./ExpensesList";
+import Chart from "../Chart/Chart";
 
 const Expenses = (Props) => {
   // adding a filter here
@@ -16,6 +16,7 @@ const Expenses = (Props) => {
 
   return (
     <div className="expenses">
+      <Chart dataPoints={filteredExpenses} />
       <ExpensesFilter onFilterExpenses={saveFilterExpenses} />
       <ExpensesList Items={filteredExpenses} />
     </div>
